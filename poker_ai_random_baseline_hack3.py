@@ -144,6 +144,6 @@ if __name__ == "__main__":
         name="DQN",
         stop={"timesteps_total": 10000000},
         checkpoint_freq=1000,
-        storage_path="/home/haoming/extreme_driving/Adeesh/RL/project/marl/results/" + env_name + "hack3",
+        local_dir="/home/haoming/extreme_driving/Adeesh/RL/project/marl/results/" + env_name +"hack1",
         config=config.to_dict(),
     )
