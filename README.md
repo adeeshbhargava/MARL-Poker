@@ -1,6 +1,6 @@
 # MARL-Poker
 
-# Installation:
+## Installation:
 
 PettingZoo[classic,butterfly]>=1.24.0
 Pillow>=9.4.0
