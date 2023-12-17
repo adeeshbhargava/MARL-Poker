@@ -32,19 +32,19 @@ training agents for optimal performance in competitive multiplayer environments.
 
 # Tournament
 
-# DQN_Self_Play_2 vs DQN_Independent (Finals)
+# DQN Self Play Improved vs DQN_Independent (Finals)
 
 <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/a55d08f8-22e8-4e93-a068-4523d60c0e5a" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/9c76076c-5d57-4327-947b-48115d58db6c" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/545ac418-dade-42ba-9485-7f2a53af3b1e" width="350" />
 
-# DQN_Independent vs DQN_shared
+# DQN Independent vs DQN shared
 
 <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/a3672063-8dc9-481c-825f-9bb14fc47a10" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/2b1836c2-81de-4c5c-b29a-82146200167e" width="300" /> | <img src= "https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/c34e582d-e617-4258-8a74-383d283b9076" width="350" />
 
-# DQN_Self_Play_1 vs DQN_Self_Play_2
+# DQN Self Play Classic vs DQN Self Play Improved
 
 <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/dc23633d-96e6-4182-b815-e0bf8c68d9e9" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/779c929b-4c32-45b9-9713-430eea4f7e44" width="300" /> | <img src= "https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/87404492-f13f-4265-aa6e-91e591315612" width="350" />
 
-# DQN_baseline vs DQN_Independent
+# DQN baseline vs DQN Independent
 
 <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/223ac7f6-20ee-4e4b-b44b-7092ed5f2369.png" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/bd863e10-7eff-4e23-a6a3-7b11b23a84aa.png" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/e8f3084b-6276-4e18-9040-f8417d647564.png" width="350" />
 
