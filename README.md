@@ -3,7 +3,7 @@
 This work explores strategies to adapt single-player reinforcement
 learning algorithms for competitive play in two-player adversarial games such as
 poker. To effectively learn to play against a competitive opponent in the absence
-of an experiment, we experiment with different strategies such as training against
+of an expert, we experiment with different strategies such as training against
 a random policy, adversarial training and self-play. We conduct extensive exper-
 imentation to test effectiveness of each strategy and summarize our insights into
 training agents for optimal performance in competitive multiplayer environments.
