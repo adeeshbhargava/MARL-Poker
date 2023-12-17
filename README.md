@@ -51,6 +51,18 @@ training agents for optimal performance in competitive multiplayer environments.
 
 # Training
 
+# Tensorboard Plots: Leduc
+<p float="left">
+  <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/61081707-da90-4d1d-90bb-9c2c2f9e4575" width="800" />
+</p>
+
+# Tensorboard Plots: Texas Hold'em
+<p float="left">
+  <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/095e81e0-63d9-440c-bbc4-dddbb236e743" width="800" />
+  <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/6bfeee4c-324a-4c23-a7a0-3d74c8548819" width="800" />
+  <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/c86d76b8-57f7-48ec-9c37-b14a818ddb52" width="800" />
+</p>
+
 ## DQN vs Random
 
 <p float="left">
