@@ -38,10 +38,7 @@ https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/79c8890d-6f0e-4076
 
 # DQN_baseline vs DQN_Independent
 
-![DQN_baseline](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/223ac7f6-20ee-4e4b-b44b-7092ed5f2369.png)
-![DQN_Independent](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/bd863e10-7eff-4e23-a6a3-7b11b23a84aa.png)
-![Image3](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/283f0d9b-d0a7-4dd1-a31d-d3ddf7bc0e45.png)
-![Image4](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/2ea00741-330e-4a18-beb1-610e40354c53.png)
+![DQN_baseline](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/223ac7f6-20ee-4e4b-b44b-7092ed5f2369.png) | ![DQN_Independent](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/bd863e10-7eff-4e23-a6a3-7b11b23a84aa.png) | ![Image3](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/18a9af0b-a6d4-4e96-a5bd-b03b80e5b9bc.png) | ![dqn_v_dqn_plots](https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/e8f3084b-6276-4e18-9040-f8417d647564.png)
 
 # DQN_Self_Play_1 vs DQN_Self_Play_2
 
