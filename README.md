@@ -38,7 +38,7 @@ https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/79c8890d-6f0e-4076
 
 # DQN_baseline vs DQN_Independent
 
-<img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/223ac7f6-20ee-4e4b-b44b-7092ed5f2369.png" width="200" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/bd863e10-7eff-4e23-a6a3-7b11b23a84aa.png" width="200" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/e8f3084b-6276-4e18-9040-f8417d647564.png" width="200" />
+<img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/223ac7f6-20ee-4e4b-b44b-7092ed5f2369.png" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/bd863e10-7eff-4e23-a6a3-7b11b23a84aa.png" width="300" /> | <img src="https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/e8f3084b-6276-4e18-9040-f8417d647564.png" width="350" />
 
 # DQN_Self_Play_1 vs DQN_Self_Play_2
 
