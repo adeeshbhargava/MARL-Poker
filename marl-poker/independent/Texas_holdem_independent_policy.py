@@ -1,8 +1,3 @@
-"""Uses Ray's RLlib to train agents to play Leduc Holdem.
-
-Author: Rohan (https://github.com/Rohan138)
-"""
-
 import os
 
 import ray
@@ -17,7 +12,7 @@ from ray.rllib.utils.framework import try_import_torch
 from ray.rllib.utils.torch_utils import FLOAT_MAX
 from ray.tune.registry import register_env
 
-from pettingzoo.classic import leduc_holdem_v4
+from pettingzoo.classic import leduc_holdem_v4,texas_holdem_v4,texas_holdem_no_limit_v6
 
 torch, nn = try_import_torch()
 
@@ -55,14 +50,17 @@ class TorchMaskedActions(DQNTorchModel):
         # Extract the available actions tensor from the observation.
         action_mask = input_dict["obs"]["action_mask"]
 
+        # print("action_mask: ", action_mask)
+        # breakpoint()
+
         # Compute the predicted action embedding
         action_logits, _ = self.action_embed_model(
             {"obs": input_dict["obs"]["observation"]}
         )
         # turns probit action mask into logit action mask
-        #inf_mask = torch.clamp(torch.log(action_mask), -1e10, FLOAT_MAX)
+        # inf_mask = torch.clamp(torch.log(action_mask), -1e10, FLOAT_MAX)
         inf_mask = torch.max(torch.log(action_mask), torch.tensor(torch.finfo(torch.float32).min))
-        
+
         return action_logits + inf_mask, state
 
     def value_function(self):
@@ -77,10 +75,10 @@ if __name__ == "__main__":
     # function that outputs the environment you wish to register.
 
     def env_creator():
-        env = leduc_holdem_v4.env()
+        env = texas_holdem_v4.env()
         return env
 
-    env_name = "leduc_holdem_v4"
+    env_name = "texas_holdem_v4"
     register_env(env_name, lambda config: PettingZooEnv(env_creator()))
 
     test_env = PettingZooEnv(env_creator())
@@ -97,53 +95,41 @@ if __name__ == "__main__":
             dueling=False,
             model={"custom_model": "pa_model"},
         )
-        #Changing the config per player
-        
         .multi_agent(
             policies={
-                "player_0": (None, obs_space, act_space, {
-                    "exploration_config": {
-                        "type": "EpsilonGreedy",
-                        "initial_epsilon": 0.1,  # Set initial epsilon to 1.0 for exploration
-                        "final_epsilon": 0.0,
-                        "epsilon_timesteps": 100000,
-                    }
-                }),
-                "player_1": (None, obs_space, act_space, {
-                    "exploration_config": {
-                        "type": "EpsilonGreedy",
-                        "initial_epsilon": 1,  # Set initial epsilon to 1.0 for exploration
-                        "final_epsilon": 0.0,
-                        "epsilon_timesteps": 100000,
-                    }
-                }),
+                "player_0": (None, obs_space, act_space, {}),
+                "player_1": (None, obs_space, act_space, {}),
             },
             policy_mapping_fn=(lambda agent_id, *args, **kwargs: agent_id),
-            policies_to_train=["player_0"]
         )
-        
+        # .multi_agent(
+        #     policies={
+        #         "shared_policy": (None, obs_space, act_space, {}),
+        #     },
+        #     policy_mapping_fn=(lambda agent_id, *args, **kwargs: "shared_policy"),
+        # )
         .resources(num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", "0")))
         .debugging(
             log_level="DEBUG"
         )  # TODO: change to ERROR to match pistonball example
         .framework(framework="torch")
-        # .exploration(
-        #     exploration_config={
-        #         # The Exploration class to use.
-        #         "type": "EpsilonGreedy",
-        #         # Config for the Exploration class' constructor:
-        #         "initial_epsilon": 0.1,
-        #         "final_epsilon": 0.0,
-        #         "epsilon_timesteps": 100000,  # Timesteps over which to anneal epsilon.
-        #     }
-        # )
+        .exploration(
+            exploration_config={
+                # The Exploration class to use.
+                "type": "EpsilonGreedy",
+                # Config for the Exploration class' constructor:
+                "initial_epsilon": 0.1,
+                "final_epsilon": 0.0,
+                "epsilon_timesteps": 100000,  # Timesteps over which to anneal epsilon.
+            }
+        )
     )
 
     tune.run(
         alg_name,
         name="DQN",
-        stop={"timesteps_total": 10000000},
-        checkpoint_freq=1000,
-        storage_path="/home/haoming/extreme_driving/Adeesh/RL/project/marl/results/" + env_name +"hack2",
+        stop={"timesteps_total": 2500000},
+        checkpoint_freq=100,
+        local_dir="/home/haoming/extreme_driving/Adeesh/RL/project/marl/results/" + env_name +"_independent_policy",
         config=config.to_dict(),
     )

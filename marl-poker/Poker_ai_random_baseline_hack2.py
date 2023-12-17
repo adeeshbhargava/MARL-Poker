@@ -142,8 +142,8 @@ if __name__ == "__main__":
     tune.run(
         alg_name,
         name="DQN",
-        stop={"timesteps_total": 10000000},
-        checkpoint_freq=1000,
-        local_dir="/home/haoming/extreme_driving/Adeesh/RL/project/marl/results/" + env_name +"hack1",
+        stop={"timesteps_total": 100000},
+        checkpoint_freq=10,
+        local_dir="/home/haoming/extreme_driving/Adeesh/RL/project/marl/results/" + env_name +"smallrun",
         config=config.to_dict(),
     )

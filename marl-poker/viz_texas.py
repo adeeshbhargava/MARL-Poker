@@ -7,7 +7,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 import imageio
-from tqdm import tqdm
+from tqdm import tqdm 
 
 import ray
 from ray.rllib.algorithms.algorithm import Algorithm
@@ -15,10 +15,10 @@ from ray.rllib.env.wrappers.pettingzoo_env import PettingZooEnv
 from ray.rllib.models import ModelCatalog
 from ray.tune.registry import register_env
 # from rllib_leduc_holdem import TorchMaskedActions
-from Poker_ai_random_baseline_hack1 import TorchMaskedActions
+from baselines.Texas_holdem_poker_marl import TorchMaskedActions
 
 from gymnasium.core import Env
-from pettingzoo.classic import leduc_holdem_v4
+from pettingzoo.classic import texas_holdem_v4
 
 ACTION2LABEL = {
     0 : 'CALL', 
@@ -42,6 +42,9 @@ parser.add_argument(
 parser.add_argument(
     "--total_rounds", default=5, type=int,
 )
+parser.add_argument(
+    '--base_dir', default=os.getcwd()
+)
 args = parser.parse_args()
 
 
@@ -57,7 +60,7 @@ ModelCatalog.register_custom_model("pa_model", TorchMaskedActions)
 
 
 def env_creator():
-    env = leduc_holdem_v4.env(render_mode='rgb_array')
+    env = texas_holdem_v4.env(render_mode='rgb_array')
     return env
 
 
@@ -70,24 +73,25 @@ def draw(pno, action, reward, ann):
     text = f"P{pno} : {label}"
 
     if pno == 1:
-        text_pos = (50, 300)
+        text_pos = (10, 100)
         color = (255, 255, 255)
     else:
-        text_pos = (50, 700)
+        text_pos = (10, 800)
         color = (255, 255, 255)
     
-    ann = cv2.putText(ann, text, text_pos, 0, 1, color, 2, cv2.LINE_AA)
+    ann = cv2.putText(ann, text, text_pos, 0, 0.9, color, 2, cv2.LINE_AA)
     return ann
 
-
 def draw_total(round, reward_sums, total_wins, ann):
-    ann = cv2.putText(ann, f'Game : {round}', (25, 500), 0, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
-    ann = cv2.putText(ann, f'TR : {reward_sums[1][-1]}, TW : {total_wins[1][-1]}', (300, 50), 0, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
-    ann = cv2.putText(ann, f'TR : {reward_sums[2][-1]}, TW : {total_wins[2][-1]}', (300, 975), 0, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
+    ann = cv2.putText(ann, f'Game : {round}', (10, 650), 0, 0.9, (255, 255, 255), 2, cv2.LINE_AA)
+    ann = cv2.putText(ann, f'TW : {total_wins[1][-1]}', (500, 35), 0, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
+    ann = cv2.putText(ann, f'TW : {total_wins[2][-1]}', (500, 980), 0, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
+    ann = cv2.putText(ann, f'TR : {reward_sums[1][-1]}', (50, 35), 0, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
+    ann = cv2.putText(ann, f'TR : {reward_sums[2][-1]}', (50, 980), 0, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
     return ann
 
 env = env_creator()
-env_name = "leduc_holdem_v4"
+env_name = "texas_holdem_v4"
 register_env(env_name, lambda config: PettingZooEnv(env_creator()))
 
 
@@ -102,7 +106,7 @@ im = 0
 all_renders = []
 
 
-for e in tqdm(range(TOTAL_ROUNDS), desc='total rounds'):
+for e in tqdm(range(TOTAL_ROUNDS), desc='round'):
     env.reset()
 
     renders = []
@@ -153,19 +157,22 @@ for e in tqdm(range(TOTAL_ROUNDS), desc='total rounds'):
             total_wins[pno].append(total_wins[pno][-1] + 1)
         else:
             total_wins[pno].append(total_wins[pno][-1])
-    
-    if TOTAL_ROUNDS == 5:        
-        ann = renders[-1].copy()
-        ann_renders.append(draw_total(e, reward_sums, total_wins, ann))
-        for render in ann_renders:
-            image = Image.fromarray(render.astype(np.uint8))
-            all_renders.append(image)
-            # image.save(f'/home/haoming/extreme_driving/Adeesh/RL/project/marl/render/{im}.png')
-            # im += 1
+    # print("end round", e, reward_sums, total_wins)
 
-if TOTAL_ROUNDS == 5:
-    imageio.mimsave(f'/home/haoming/extreme_driving/Adeesh/RL/project/marl/render_{TOTAL_ROUNDS}/{args.name}.mp4', all_renders, fps=0.8)
-    imageio.mimsave(f'/home/haoming/extreme_driving/Adeesh/RL/project/marl/render_{TOTAL_ROUNDS}/{args.name}.gif', all_renders, fps=0.8)
+    ann = renders[-1].copy()
+    ann_renders.append(draw_total(e, reward_sums, total_wins, ann))
+
+    # print ('## renders', len(ann_renders))
+    for render in ann_renders:
+        image = Image.fromarray(render.astype(np.uint8))
+        all_renders.append(image)
+        # image.save(f'/home/abhishek/Desktop/CMU/sem3/RL/proj/renders/{im}.png')
+        # im += 1
+
+
+if TOTAL_ROUNDS < 100:    
+    imageio.mimsave(f'{args.base_dir}/{args.name}.mp4', all_renders, fps=0.8)
+    imageio.mimsave(f'{args.base_dir}/{args.name}.gif', all_renders, fps=0.8)
 
 x = list(range(TOTAL_ROUNDS + 1))
 
@@ -175,7 +182,7 @@ plt.xlabel('Number of games')
 plt.ylabel('Cumulative Reward')
 plt.title('Reward growth over games')
 plt.legend()
-plt.savefig(f'/home/haoming/extreme_driving/Adeesh/RL/project/marl/render_{TOTAL_ROUNDS}/{args.name}_reward.png')
+plt.savefig(f'{args.base_dir}/{args.name}_reward.png')
 
 plt.clf()
 
@@ -185,7 +192,9 @@ plt.xlabel('Number of games')
 plt.ylabel('Cumulative Wins')
 plt.title('Wins growth over games')
 plt.legend()
-plt.savefig(f'/home/haoming/extreme_driving/Adeesh/RL/project/marl/render_{TOTAL_ROUNDS}/{args.name}_wins.png')
+plt.savefig(f'{args.base_dir}/{args.name}_wins.png')
 
 print ('done')
 
+print ('Player 1 : ', reward_sums[1][-1], round(total_wins[1][-1]/TOTAL_ROUNDS, 2))
+print ('Player 2 : ', reward_sums[2][-1], round(total_wins[2][-1]/TOTAL_ROUNDS, 2))
