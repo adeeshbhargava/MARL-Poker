@@ -13,7 +13,7 @@ training agents for optimal performance in competitive multiplayer environments.
 | Player 1             | Player 2             | Strategy             | Win-rate        | Reward (1000 Games) | Winner            |
 |----------------------|----------------------|----------------------|-----------------|----------------------|------------------|
 | DQN_baseline         | DQN_Independent      | Cross Competition    | 26%:71%:1%      | 1329.5               | DQN_Independent  |
-| DQN_Self_Play_1      | DQN_Self_Play_2      | Cross Competition    | 40%:58%:2%      | 489                  | DQN_Self_Play_2  |
+| DQN_Self_Play_classic      | DQN_Self_Play_improved      | Cross Competition    | 40%:58%:2%      | 489                  | DQN_Self_Play_2  |
 | DQN_Independent      | DQN_shared           | Cross Competition    | 55%:41%:4%      | 464.5                | DQN_Independent  |
 | DQN_Self_Play_2      | DQN_Independent      | Cross Competition    | 58%:40%:2%      | 462                  | DQN_Self_Play_2  |
 
@@ -25,8 +25,8 @@ training agents for optimal performance in competitive multiplayer environments.
 | DQN Agent   | Random Agent     | DQN_Baseline        | 81%:19%:0%      | 1191.5               | DQN_baseline     |
 | DQN Agent   | DQN Agent        | Independent Learning| 51%:47%:2%      | 141.5                | DQN_Independent  |
 | DQN Agent   | DQN Agent        | Shared Learning     | 49%:49%:2%      | 101                  | DQN_shared       |
-| DQN Agent   | DQN Agent        | Self Play 1         | 50%:48%:2%      | 64.5                 | DQN_self_play_1  |
-| DQN Agent   | DQN Agent        | Self Play 2         | 51%:47%:3%      | 157.5                | DQN_self_play_2  |
+| DQN Agent   | DQN Agent        | Self Play classic         | 50%:48%:2%      | 64.5                 | DQN_self_play_1  |
+| DQN Agent   | DQN Agent        | Self Play improved        | 51%:47%:3%      | 157.5                | DQN_self_play_2  |
 
 ## DQN Agent vs Random Agent Visualistion on Texas Hold'em Poker
 
