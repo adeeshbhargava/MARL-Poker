@@ -14,7 +14,7 @@ torch>=1.13.1
 
 tensorflow-probability>=0.19.0
 
-Visualisations:
+DQN Agent vs Random Agent Visualistion on Texas Hold'em Poker
 
 https://github.com/adeeshbhargava/MARL-Poker/assets/116693172/79c8890d-6f0e-4076-b504-d6c79fad08ca
 
