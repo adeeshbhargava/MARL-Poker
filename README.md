@@ -14,10 +14,8 @@ torch>=1.13.1
 
 tensorflow-probability>=0.19.0
 
-##
-
-Final Results:
-Training:
+## Final Results
+# Training:
 
 | Player 1    | Player 2       | Strategy           | Win-rate     | Reward (1000 Games) | Winner           |
 |-------------|-----------------|--------------------|--------------|----------------------|------------------|
@@ -27,7 +25,7 @@ Training:
 | DQN Agent   | DQN Agent        | Self Play 1        | 50%:48%:2%   | 64.5                 | DQN_self_play_1  |
 | DQN Agent   | DQN Agent        | Self Play 2        | 51%:47%:3%   | 157.5                | DQN_self_play_2  |
 
-Tournament:
+# Tournament:
 
 | Player 1             | Player 2             | Strategy             | Win-rate        | Reward (1000 Games) | Winner            |
 |----------------------|----------------------|----------------------|-----------------|----------------------|-------------------|
